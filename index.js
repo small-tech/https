@@ -1,6 +1,6 @@
 const http = require('http')
 const https = require('https')
-const redirectHTTPS = require('redirect-https')
+const redirectHTTPS = require('./lib/redirect-https')
 const Express = require('express')
 const AcmeTLS = require('@ind.ie/acme-tls')
 
