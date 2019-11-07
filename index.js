@@ -1,6 +1,4 @@
-const http = require('http')
 const https = require('https')
-const redirectHTTPS = require('./lib/redirect-https')
 const Express = require('express')
 const AcmeTLS = require('./lib/acme-tls')
 
@@ -25,14 +23,6 @@ const acmeTLS = AcmeTLS.create({
   configDir: `./config/${hostname}`,
   approvedDomains: [hostname],
   debug: true
-})
-
-// HTTP server to handle redirects for Let’s Encrypt ACME HTTP-01 challenge method.
-const httpsRedirectionMiddleware = redirectHTTPS()
-
-const httpServer = http.createServer(acmeTLS.middleware(httpsRedirectionMiddleware))
-httpServer.listen(80, () => {
-  console.log('👉 HTTP → HTTPS redirection active.')
 })
 
 // Additional options for the server (none yet).
