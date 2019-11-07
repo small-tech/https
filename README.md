@@ -4,12 +4,16 @@ Drop in replacement for Node https module that automatically handles certificate
 
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
-  - Automatically-provisioned TLS certificates at localhost with no browser warnings.
+  - __TODO:__ Automatically-provisioned TLS certificates at localhost with no browser warnings.
   - Automatically-provisioned TLS certificates at hostname via Let’s Encrypt.
 
 That’s it.
 
 This is basically a batteries-included version of the standard Node.js `https` module.
+
+## TODO
+
+  - Integrate Nodecert.
 
 ## Audience
 
