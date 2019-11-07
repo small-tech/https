@@ -1,6 +1,6 @@
 # @small-tech/https
 
-Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).
+Drop in replacement for Node https module that automatically handles certificate provisioning and renewal both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).
 
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
