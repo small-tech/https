@@ -6,6 +6,20 @@ const AcmeTLS = require('./lib/acme-tls')
 
 const hostname = require('@small-tech/cross-platform-hostname')
 
+//
+// The API I’m eventually aiming for is:
+//
+// const https = require('@small-tech/https')
+// const Express = require('express')
+//
+// const app = new Express()
+// const server = https.createServer(app)
+//
+// So, basically, to be isomorphic with the built-in https module.
+//
+// (And you can optionally supply an options object as the first argument, which would include the types of options
+// you can see below.)
+
 const acmeTLS = AcmeTLS.create({
   server: 'staging',
   configDir: `./config/${hostname}`,
