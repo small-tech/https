@@ -7,12 +7,7 @@ const AcmeTLS = require('./lib/acme-tls')
 const hostname = require('@small-tech/cross-platform-hostname')
 
 const acmeTLS = AcmeTLS.create({
-  // Note: while testing, you might want to use the staging server at:
-  // ===== https://acme-staging-v02.api.letsencrypt.org/directory
-  // server: 'https://acme-v02.api.letsencrypt.org/directory',
-  server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
-
-  version: 'draft-11',
+  server: 'staging',
   configDir: `./config/${hostname}`,
   approvedDomains: [hostname],
   agreeTos: true,
