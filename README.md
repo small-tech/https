@@ -34,9 +34,16 @@ Here’s how you’d create and run a basic Express app that uses this module.
 1. ### Set up:
 
     ```sh
+    # Create the project folder and switch to it.
     mkdir example && cd example
+
+    # Create a new npm module for the example.
     npm init --yes
+
+    # Install dependencies.
     npm i @small-tech/https express
+
+    # Open up the main file in your default editor.
     $EDITOR index.js
     ```
 
@@ -82,8 +89,17 @@ Here’s how you’d create and run a basic Express app that uses this module.
 Note, you can find a version of this example in the `/example` folder. To download and run that version:
 
 ```sh
-# Clone this repository
-git clone <LEFT OFF HERE>
+# Clone this repository.
+git clone https://source.ind.ie/site.js/lib/https.git
+
+# Switch to the directory.
+cd https
+
+# Install dependencies.
+npm i
+
+# Run the example.
+npm run example
 ```
 
 ## History
