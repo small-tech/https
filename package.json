@@ -1,13 +1,17 @@
 {
-  "name": "acme",
+  "name": "@small-tech/https",
   "version": "1.0.0",
-  "description": "",
+  "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "node example/"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Aral Balkan <aral@ind.ie> (https://ar.al)",
+  "contributors": [
+    "AJ ONeal (https://github.com/solderjs)"
+  ],
+  "license": "Portions AGPL-3.0-or-later, MPL 2.0, and MIT",
   "dependencies": {
     "@ind.ie/rsa-compat": "^1.0.0",
     "@small-tech/cross-platform-hostname": "^1.0.0",
