@@ -13,19 +13,6 @@ const acmeTLS = AcmeTLS.create({
 
   debug: true,
 
-  // Instead of an email address, we pass the hostname. ACME TLS is based on
-  // Greenlock.js and those folks decided to make email addresses a requirement
-  // instead of an optional element as is the case with Let’s Encrypt. This has deep
-  // architectural knock-ons including to the way certificates are stored in
-  // the le-store-certbot storage strategy, etc. Instead of forking and gutting
-  // multiple modules (I’ve already had to fork a number to remove the telemetry),
-  // we are using the hostname in place of the email address as a local identifier.
-  // Our fork of acme-v02 is aware of this and will simply disregard any email
-  // addresses passed that match the hostname before making the call to the ACME
-  // servers. (That module, as it reflects the ACME spec, does _not_ have the email
-  // address as a required property.)
-  email: hostname,
-
   telemetry: false,
   communityMember: false
 })
