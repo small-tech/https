@@ -1,5 +1,5 @@
 const Express = require('express')
-const AcmeTLS = require('./lib/acme-tls')
+const https = require('./lib/acme-tls')
 const hostname = require('@small-tech/cross-platform-hostname')
 
 //
@@ -23,7 +23,7 @@ const options = {
   debug: true
 }
 
-const server = AcmeTLS.createServer(options, app)
+const server = https.createServer(options, app)
 
 server.listen(443, () => {
   console.log(' 🎉 Server running on port 443.')
