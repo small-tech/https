@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ind.ie/acme-tls": "^2.2.1",
+    "@ind.ie/rsa-compat": "^1.0.0",
     "@small-tech/cross-platform-hostname": "^1.0.0",
-    "escape-html": "^1.0.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pyconf": "^1.1.7",
+    "safe-replace": "^1.1.0"
   }
 }
