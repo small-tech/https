@@ -10,11 +10,7 @@ const acmeTLS = AcmeTLS.create({
   server: 'staging',
   configDir: `./config/${hostname}`,
   approvedDomains: [hostname],
-
-  debug: true,
-
-  telemetry: false,
-  communityMember: false
+  debug: true
 })
 
 // HTTP server to handle redirects for Let’s Encrypt ACME HTTP-01 challenge method.
