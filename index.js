@@ -169,6 +169,9 @@ Greenlock.create = function (gl) {
   // subdomain (or any other subdomain) included, pass it explicitly.
   if (!gl.approvedDomains) { gl.approvedDomains = [hostname] }
 
+  // Add support for www subdomain if requested.
+  if (gl.wwwSubdomain === true) { gl.approvedDomains.push(`www.${hostname}`) }
+
   if (!gl.renewWithin) { gl.renewWithin = 14 * DAY; }
   // renewBy has a default in le-sni-auto
 

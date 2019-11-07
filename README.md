@@ -57,12 +57,13 @@ Here’s how you’d create and run a basic Express app that uses this module.
     })
 
     //
-    // Create an HTTPS server with
+    // Create an HTTPS serve
     //
 
     const options = {
-      server: 'staging'
-      debug: true
+      server: 'production',   // Hit Let’s Encrypt’s production URL (not staging). Default is staging.
+      wwwSubdomain: true,     // Also response to www.<hostname>, alongside the default of just <hostname>.
+      debug: true             // Show debugging info (default is false).
     }
 
     const server = https.createServer(options, app)
@@ -78,6 +79,12 @@ Here’s how you’d create and run a basic Express app that uses this module.
     node index
     ```
 
+Note, you can find a version of this example in the `/example` folder. To download and run that version:
+
+```sh
+# Clone this repository
+git clone <LEFT OFF HERE>
+```
 
 ## History
 
