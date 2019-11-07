@@ -436,10 +436,7 @@ Greenlock.create = function (gl) {
     return gl.core.certificates.checkAsync(args);
   };
 
-  gl.middleware = gl.middleware || require('./lib/lib/middleware');
-  if (gl.middleware.create) {
-    gl.middleware = gl.middleware.create(gl);
-  }
+  gl.middleware = require('./lib/lib/middleware').create(gl);
 
   //
   // Automatically create acme-tls middleware with HTTP server and redirect-to-https.
