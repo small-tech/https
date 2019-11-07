@@ -10,7 +10,6 @@ const acmeTLS = AcmeTLS.create({
   server: 'staging',
   configDir: `./config/${hostname}`,
   approvedDomains: [hostname],
-  agreeTos: true,
 
   debug: true,
 
