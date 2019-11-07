@@ -17,6 +17,8 @@ const acmeTLS = AcmeTLS.create({
   approvedDomains: [hostname],
   agreeTos: true,
 
+  debug: true,
+
   // Instead of an email address, we pass the hostname. ACME TLS is based on
   // Greenlock.js and those folks decided to make email addresses a requirement
   // instead of an optional element as is the case with Let’s Encrypt. This has deep
