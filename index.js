@@ -165,6 +165,10 @@ Greenlock.create = function (gl) {
   // address as a required property.)
   gl.email = hostname
 
+  // The list of approved domains defaults to just the hostname. If you want the www
+  // subdomain (or any other subdomain) included, pass it explicitly.
+  if (!gl.approvedDomains) { gl.approvedDomains = [hostname] }
+
   if (!gl.renewWithin) { gl.renewWithin = 14 * DAY; }
   // renewBy has a default in le-sni-auto
 

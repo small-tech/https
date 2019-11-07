@@ -19,7 +19,7 @@ app.get('/', (request, response) => {
 const options = {
   server: 'staging',
   configDir: `./example/config/${hostname}`,
-  approvedDomains: [hostname],
+  // approvedDomains: [hostname], // (default)
   debug: true
 }
 
