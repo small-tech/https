@@ -13,6 +13,7 @@
   ],
   "license": "Portions AGPL-3.0-or-later, MPL 2.0, and MIT",
   "dependencies": {
+    "@ind.ie/nodecert": "^3.1.0",
     "@ind.ie/rsa-compat": "^1.0.0",
     "@small-tech/cross-platform-hostname": "^1.0.0",
     "express": "^4.17.1",

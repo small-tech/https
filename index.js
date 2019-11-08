@@ -1,7 +1,13 @@
+const os = require('os')
+const path = require('path')
+const fs = require('fs')
+
 const http = require('http')
 const https = require('https')
+
 const redirectHTTPS = require('./lib/redirect-https')
 const hostname = require('@small-tech/cross-platform-hostname')
+const nodecert = require('@ind.ie/nodecert')
 
 // File system challenge (used by the HTTP-01 authentication method).
 const letsEncryptFileSystemChallenge = require('./lib/le-challenge-fs')
@@ -104,15 +110,47 @@ Greenlock.createServer = function(options, requestListener) {
       options = {}
     }
 
-    const greenlock = Greenlock.create(options)
+    //
+    // Check the type of server requested. The options are:
+    //
+    // 1. development (at localhost)
+    // 2. production (at hostname with Let’s Encrypt certificates)
+    // 3. staging (at hostname using Let’s Encrypt staging server and debug=true; for troubleshooting)
+    //
+    // The default is development.
+    //
+    if (options.domain == null) options.domain = 'localhost'          // default
+    if (options.domains != null || options.domain !== 'localhost') {
+      //
+      // Create server to respond to requested hostnames with globally-trusted certificates.
+      //
+      console.log(' 🔒 [@small-tech/https] Creating server with globally-trusted Let’s Encrypt certificates.')
+      // Add TLS options from the ACME TLS Certificate to any existing options that
+      // might have been passed in above. (Currently, this is the SNICallback function.)
+      const greenlock = Greenlock.create(options)
+      Object.assign(options, greenlock.tlsOptions)
+    } else {
+      //
+      // Default: create server at localhost with locally-trusted certificates.
+      //
+      console.log(' 🔒 [@small-tech/https] Creating server at localhost with locally-trusted certificates.')
 
-    // Add TLS options from the ACME TLS Certificate to any existing options that
-    // might have been passed in above. (Currently, this is the SNICallback function.)
-    Object.assign(options, greenlock.tlsOptions)
+      // Ensure that locally-trusted certificates exist.
+      nodecert()
+
+      const nodecertDirectory = path.join(os.homedir(), '.nodecert')
+
+      const defaultOptions = {
+        key: fs.readFileSync(path.join(nodecertDirectory, 'localhost-key.pem')),
+        cert: fs.readFileSync(path.join(nodecertDirectory, 'localhost.pem'))
+      }
+
+      Object.assign(options, defaultOptions)
+    }
 
     const server = https.createServer(options, requestListener)
 
-    console.log('[acme-tls] Created server.')
+    console.log(' 🔒 [@small-tech/https] Created server.')
 
     return server
   }
@@ -121,7 +159,7 @@ Greenlock.createServer = function(options, requestListener) {
 Greenlock.create = function (gl) {
   gl.store = require('./lib/le-store-certbot').create({
     debug: gl.debug
-  , configDir: gl.configDir
+  , configDir: gl.configDir || path.join(os.homedir(), '.small-tech.org', 'https')
   , logsDir: gl.logsDir
   , webrootPath: gl.webrootPath
   });
@@ -142,9 +180,9 @@ Greenlock.create = function (gl) {
   gl.challengeType = gl.challengeType || Greenlock.challengeType;
   gl._ipc = ipc;
 
-  // Telemetry-related BS. Setting to acme-tls for now until we can safely remove.
-  gl._communityPackage = 'acme-tls';
-  gl._communityPackageVersion = 'acme-tls-wip'
+  // Telemetry-related BS. Setting to app name for now until we can safely remove.
+  gl._communityPackage = '@small-tech/https';
+  gl._communityPackageVersion = '@small-tech/https-v1'
 
   // Yes, we freakin’ agree to the Terms and Conditions. Or don’t use.
   gl.agreeTos = true;
@@ -165,9 +203,24 @@ Greenlock.create = function (gl) {
   // address as a required property.)
   gl.email = hostname
 
-  // The list of approved domains defaults to just the hostname. If you want the www
-  // subdomain (or any other subdomain) included, pass it explicitly.
-  if (!gl.approvedDomains) { gl.approvedDomains = [hostname] }
+  // In @small-tech/https, approvedDomains is only used internally.
+  // Use the domain and domains properties to specify the domains.
+  gl.approvedDomains = []
+
+  if (gl.domain != null) {
+    // Special case: 'hostname' is replaced with the hostname of the computer. It should
+    // be a fully-qualified hostname for this to work.
+    if (gl.domain === 'hostname') {
+      gl.domain = hostname
+    }
+    gl.approvedDomains.push(gl.domain)
+  }
+
+  // If a domains array is provided, it is the only source of truth that is used and it
+  // overrides domain if it is provided.
+  if (gl.domains != null) {
+    gl.approvedDomains = gl.domains
+  }
 
   // Add support for www subdomain if requested.
   if (gl.wwwSubdomain === true) { gl.approvedDomains.push(`www.${hostname}`) }
@@ -177,12 +230,13 @@ Greenlock.create = function (gl) {
 
   gl.version = 'draft-11';
 
-  if (gl.server === 'production') {
+  if (gl.staging !== true) {
     gl.server = Greenlock.defaults.productionServerUrl
-    console.log('[acme-tls] Using production server.')
+    console.log(' 🔒 [@small-tech/https] Using Let’s Encrypt production server.')
   } else {
-    console.log('[acme-tls] Using staging server.')
+    console.log(' 🔒 [@small-tech/https] Using Let’s Encrypt staging server.')
     gl.server = Greenlock.defaults.stagingServerUrl
+    gl.debug = true
   }
 
   gl.acme = gl.acme || ACME.create({ debug: gl.debug });
@@ -446,7 +500,7 @@ Greenlock.create = function (gl) {
   gl.middleware = require('./lib/lib/middleware').create(gl);
 
   //
-  // Automatically create acme-tls middleware with HTTP server and redirect-to-https.
+  // Automatically create https middleware with HTTP server and redirect-to-https.
   //
 
   // HTTP server to handle redirects for Let’s Encrypt ACME HTTP-01 challenge method.
@@ -454,7 +508,7 @@ Greenlock.create = function (gl) {
 
   const httpServer = http.createServer(gl.middleware(httpsRedirectionMiddleware))
   httpServer.listen(80, () => {
-    console.log('[acme-tls] 👉 HTTP → HTTPS redirection active.')
+    console.log(' 🔒 [@small-tech/https] HTTP → HTTPS redirection active.')
   })
 
   //var SERVERNAME_RE = /^[a-z0-9\.\-_]+$/;
