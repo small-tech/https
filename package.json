@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "node example/"
   },
-  "author": "Aral Balkan <aral@ind.ie> (https://ar.al)",
+  "author": "Aral Balkan <aral@small-tech.org> (https://ar.al)",
   "contributors": [
     "AJ ONeal (https://github.com/solderjs)"
   ],
