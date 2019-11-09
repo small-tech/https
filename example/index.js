@@ -11,10 +11,10 @@ let options = {}
 // For globally-trusted Let’s Encrypt certificates uncomment options.
 // To provision certificates, also remove “staging: true” property.
 
-// options = {
-//   domain: 'hostname',
-//   staging: true
-// }
+options = {
+  domain: 'hostname',
+  // staging: true
+}
 
 // Create HTTPS server at https://localhost with locally-trusted certificates.
 const server = https.createServer(options, (request, response) => {
