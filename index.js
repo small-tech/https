@@ -125,6 +125,14 @@ Greenlock.createServer = function(options, requestListener) {
       // Create server to respond to requested hostnames with globally-trusted certificates.
       //
       console.log(' 🔒 [@small-tech/https] Creating server with globally-trusted Let’s Encrypt certificates.')
+
+      // If a certificate directory is provided, use that.
+      if (options.certificateDirectory != null) {
+        // Since we are using local certificates, we will store them in
+        // <directory-person-asked-for>/global
+        options.glConfigDir = path.join(certificateDirectory, 'global')
+      }
+
       // Add TLS options from the ACME TLS Certificate to any existing options that
       // might have been passed in above. (Currently, this is the SNICallback function.)
       const greenlock = Greenlock.create(options)
@@ -135,11 +143,16 @@ Greenlock.createServer = function(options, requestListener) {
       //
       console.log(' 🔒 [@small-tech/https] Creating server at localhost with locally-trusted certificates.')
 
-      // Ensure that locally-trusted certificates exist.
-      nodecert()
-
       // If a certificateDirectory is requested, use that. Otherwise, use default (~/.nodecert).
-      const nodecertDirectory = options.certificateDirectory || path.join(os.homedir(), '.nodecert')
+      if (options.certificateDirectory != null) {
+        // Since we are using local certificates, we will store them in
+        // <directory-person-asked-for>/local
+        options.certificateDirectory = path.join(options.certificateDirectory, 'local')
+      }
+      const nodecertDirectory = options.certificateDirectory || path.join(os.homedir(), '.small-tech.org', 'https', 'local')
+
+      // Ensure that locally-trusted certificates exist.
+      nodecert(nodecertDirectory)
 
       const defaultOptions = {
         key: fs.readFileSync(path.join(nodecertDirectory, 'localhost-key.pem')),
@@ -160,7 +173,7 @@ Greenlock.createServer = function(options, requestListener) {
 Greenlock.create = function (gl) {
   gl.store = require('./lib/le-store-certbot').create({
     debug: gl.debug
-  , configDir: gl.configDir || path.join(os.homedir(), '.small-tech.org', 'https')
+  , configDir: gl.configDir || path.join(os.homedir(), '.small-tech.org', 'https', 'global')
   , logsDir: gl.logsDir
   , webrootPath: gl.webrootPath
   });

@@ -8,7 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-  - `certificateDirectory` option for overriding the default certificate directory.
+## [1.0.2] - 2019-11-25
+
+  - `certificateDirectory` option for overriding the default certificate directory. Local certificates will be created in a `local` subdirectory of this directory and global certificates will be created in a `global` subdirectory of this directory.
 
 ## [1.0.1] - 2019-11-09
 
