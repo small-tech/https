@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-Nothing yet.
+### Added
+
+  - `certificateDirectory` option for overriding the default certificate directory.
 
 ## [1.0.1] - 2019-11-09
 

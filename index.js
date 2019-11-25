@@ -138,7 +138,8 @@ Greenlock.createServer = function(options, requestListener) {
       // Ensure that locally-trusted certificates exist.
       nodecert()
 
-      const nodecertDirectory = path.join(os.homedir(), '.nodecert')
+      // If a certificateDirectory is requested, use that. Otherwise, use default (~/.nodecert).
+      const nodecertDirectory = options.certificateDirectory || path.join(os.homedir(), '.nodecert')
 
       const defaultOptions = {
         key: fs.readFileSync(path.join(nodecertDirectory, 'localhost-key.pem')),
