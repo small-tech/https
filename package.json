@@ -1,6 +1,6 @@
 {
   "name": "@small-tech/https",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   ],
   "license": "Portions AGPL-3.0-or-later, MPL 2.0, and MIT",
   "dependencies": {
-    "@ind.ie/nodecert": "^3.1.3",
+    "@ind.ie/nodecert": "^3.1.4",
     "@ind.ie/rsa-compat": "^1.0.0",
     "@small-tech/cross-platform-hostname": "^1.0.0",
     "express": "^4.17.1",

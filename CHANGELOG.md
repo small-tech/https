@@ -6,11 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.6] - 2019-11-26
+
+### Fixed
+
+  - Update to latest nodecert (version 3.1.4) which fixes regression so Node.js once again recognises local certificates as valid.
+
 ## [1.0.5] - 2019-11-26
 
 ### Fixed
 
-  - Update to latest nodecert which fixes crash when multiple directories are missing in the requested nodecert configuration directory.
+  - Update to latest nodecert (version 3.1.3) which fixes crash when multiple directories are missing in the requested nodecert configuration directory.
 
 ## [1.0.4] - 2019-11-26
 
