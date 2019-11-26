@@ -125,8 +125,11 @@ Greenlock.createServer = function(options, requestListener) {
       if (options.certificateDirectory != null) {
         // Since we are using local certificates, we will store them in
         // <directory-person-asked-for>/global
-        options.glConfigDir = path.join(certificateDirectory, 'global')
+        // (configDir is the property Greenlock uses internally.)
+        options.configDir = path.join(path.resolve(options.certificateDirectory), 'global')
       }
+
+      console.log('Will look for certs in', options.configDir)
 
       // Add TLS options from the ACME TLS Certificate to any existing options that
       // might have been passed in above. (Currently, this is the SNICallback function.)

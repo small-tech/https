@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.4] - 2019-11-26
+
+### Fixed
+
+  - Setting a custom certificate directory no longer causes a crash.
+
 ## [1.0.3] - 2019-11-26
 
 ### Fixed

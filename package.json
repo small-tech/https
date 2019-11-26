@@ -1,6 +1,6 @@
 {
   "name": "@small-tech/https",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).",
   "main": "index.js",
   "scripts": {
