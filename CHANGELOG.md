@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.3] - 2019-11-26
+
+### Fixed
+
+  - Found and removed two other functions where Greenlock was phoning home. Seriously, what’s wrong with you, AJ? FFS!
+
 ### Added
+
+  - Now emits `server.SMALL_TECH_ORG_ERROR_HTTP_SERVER` event on HTTP (HTTP-01 and redirection) server error.
 
 ## [1.0.2] - 2019-11-25
 

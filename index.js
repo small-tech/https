@@ -111,14 +111,9 @@ Greenlock.createServer = function(options, requestListener) {
     }
 
     //
-    // Check the type of server requested. The options are:
+    // Create https server configuration based on domain(s) to be supported.
     //
-    // 1. development (at localhost)
-    // 2. production (at hostname with Let’s Encrypt certificates)
-    // 3. staging (at hostname using Let’s Encrypt staging server and debug=true; for troubleshooting)
-    //
-    // The default is development.
-    //
+    let httpServer = null
     if (options.domain == null) options.domain = 'localhost'          // default
     if (options.domains != null || options.domain !== 'localhost') {
       //
@@ -136,6 +131,15 @@ Greenlock.createServer = function(options, requestListener) {
       // Add TLS options from the ACME TLS Certificate to any existing options that
       // might have been passed in above. (Currently, this is the SNICallback function.)
       const greenlock = Greenlock.create(options)
+
+      //
+      // Automatically create https middleware with HTTP server and redirect-to-https.
+      //
+
+      // HTTP server to handle redirects for Let’s Encrypt ACME HTTP-01 challenge method.
+      const httpsRedirectionMiddleware = redirectHTTPS()
+      httpServer = http.createServer(greenlock.middleware(httpsRedirectionMiddleware))
+
       Object.assign(options, greenlock.tlsOptions)
     } else {
       //
@@ -164,7 +168,31 @@ Greenlock.createServer = function(options, requestListener) {
 
     const server = https.createServer(options, requestListener)
 
-    console.log(' 🔒 [@small-tech/https] Created server.')
+    server.SMALL_TECH_ORG_ERROR_HTTP_SERVER = 'small-tech.org-error-http-server'
+
+    // If we created an HTTP server to handle Let’s Encrypt HTTP-01 challenges,
+    // add an error handler that proxies errors on the HTTPS server so consumers can listen
+    // for that error (as that’s the only
+    // server we expose publicly)
+    if (httpServer !== null) {
+      httpServer.on('error', error => {
+        console.log('\n 🤯 Error: could not start HTTP server for @small-tech/https.\n')
+        if (error.code === 'EADDRINUSE') {
+          console.log(` 💥 Port 80 is already in use.\n`)
+        }
+        // We emit this on the httpsServer that is returned so that the calling
+        // party can listen for the event on the returned server instance. (We do
+        // not return the httpServer instance and hence there is no purpose in
+        // emitting the event on that server.)
+        server.emit(server.SMALL_TECH_ORG_ERROR_HTTP_SERVER, error)
+      })
+
+      httpServer.listen(80, () => {
+        console.log(' 🔒 [@small-tech/https] HTTP → HTTPS redirection active.')
+      })
+    }
+
+    console.log(' 🔒 [@small-tech/https] Created HTTPS server.')
 
     return server
   }
@@ -512,18 +540,6 @@ Greenlock.create = function (gl) {
   };
 
   gl.middleware = require('./lib/lib/middleware').create(gl);
-
-  //
-  // Automatically create https middleware with HTTP server and redirect-to-https.
-  //
-
-  // HTTP server to handle redirects for Let’s Encrypt ACME HTTP-01 challenge method.
-  const httpsRedirectionMiddleware = redirectHTTPS()
-
-  const httpServer = http.createServer(gl.middleware(httpsRedirectionMiddleware))
-  httpServer.listen(80, () => {
-    console.log(' 🔒 [@small-tech/https] HTTP → HTTPS redirection active.')
-  })
 
   //var SERVERNAME_RE = /^[a-z0-9\.\-_]+$/;
   var SERVERNAME_G = /[^a-z0-9\.\-_]/;
