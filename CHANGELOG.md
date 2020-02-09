@@ -6,12 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.8] - 2020-02-09
+
+### Changed
+
+  - Upgrade to version 3.1.5 of Nodecert (with output formatting updates).
+
 ## [1.0.7] - 2020-02-09
 
 ### Changed
 
   - Update console output format to match the one used in Site.js (cosmetic).
-  - Upgrade to version 3.1.5 of Nodecert (with same output format updates).
 
 ## [1.0.6] - 2019-11-26
 
