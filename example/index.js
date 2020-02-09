@@ -24,5 +24,5 @@ const server = https.createServer(options, (request, response) => {
 })
 
 server.listen(443, () => {
-  console.log(' 🎉 Server running on port 443.')
+  console.log('   🎉    Server running on port 443.')
 })

@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.9] - 2020-02-09
+
+### Changed
+
+  - Upgrade to version 3.1.7 of Nodecert (with fix to output formatting updates).
+
 ## [1.0.8] - 2020-02-09
 
 ### Changed
