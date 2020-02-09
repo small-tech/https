@@ -119,7 +119,7 @@ Greenlock.createServer = function(options, requestListener) {
       //
       // Create server to respond to requested hostnames with globally-trusted certificates.
       //
-      console.log(' 🔒 [@small-tech/https] Creating server with globally-trusted Let’s Encrypt certificates.')
+      console.log('   🔒    ❨@small-tech/https❩ Creating server with globally-trusted Let’s Encrypt certificates.')
 
       // If a certificate directory is provided, use that.
       if (options.certificateDirectory != null) {
@@ -128,8 +128,6 @@ Greenlock.createServer = function(options, requestListener) {
         // (configDir is the property Greenlock uses internally.)
         options.configDir = path.join(path.resolve(options.certificateDirectory), 'global')
       }
-
-      console.log('Will look for certs in', options.configDir)
 
       // Add TLS options from the ACME TLS Certificate to any existing options that
       // might have been passed in above. (Currently, this is the SNICallback function.)
@@ -148,7 +146,7 @@ Greenlock.createServer = function(options, requestListener) {
       //
       // Default: create server at localhost with locally-trusted certificates.
       //
-      console.log(' 🔒 [@small-tech/https] Creating server at localhost with locally-trusted certificates.')
+      console.log('   🔒    ❨@small-tech/https❩ Creating server at localhost with locally-trusted certificates.')
 
       // If a certificateDirectory is requested, use that. Otherwise, use default (~/.nodecert).
       if (options.certificateDirectory != null) {
@@ -179,9 +177,9 @@ Greenlock.createServer = function(options, requestListener) {
     // server we expose publicly)
     if (httpServer !== null) {
       httpServer.on('error', error => {
-        console.log('\n 🤯 Error: could not start HTTP server for @small-tech/https.\n')
+        console.log('\n   🤯    ❨@small-tech/https❩ Error: could not start HTTP server for @small-tech/https.\n')
         if (error.code === 'EADDRINUSE') {
-          console.log(` 💥 Port 80 is already in use.\n`)
+          console.log(`   💥    ❨@small-tech/https❩ Port 80 is already in use.\n`)
         }
         // We emit this on the httpsServer that is returned so that the calling
         // party can listen for the event on the returned server instance. (We do
@@ -191,11 +189,11 @@ Greenlock.createServer = function(options, requestListener) {
       })
 
       httpServer.listen(80, () => {
-        console.log(' 🔒 [@small-tech/https] HTTP → HTTPS redirection active.')
+        console.log('   🔒    ❨@small-tech/https❩ HTTP → HTTPS redirection active.')
       })
     }
 
-    console.log(' 🔒 [@small-tech/https] Created HTTPS server.')
+    console.log('   🔒    ❨@small-tech/https❩ Created HTTPS server.')
 
     return server
   }
@@ -277,9 +275,9 @@ Greenlock.create = function (gl) {
 
   if (gl.staging !== true) {
     gl.server = Greenlock.defaults.productionServerUrl
-    console.log(' 🔒 [@small-tech/https] Using Let’s Encrypt production server.')
+    console.log('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt production server.')
   } else {
-    console.log(' 🔒 [@small-tech/https] Using Let’s Encrypt staging server.')
+    console.log('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt staging server.')
     gl.server = Greenlock.defaults.stagingServerUrl
     gl.debug = true
   }
@@ -439,13 +437,16 @@ Greenlock.create = function (gl) {
           gl.approveDomains(opts, certs, function (_err, results) {
             if (_err) {
               if (false !== gl.logRejectedDomains) {
-                console.error("[Error] approveDomains rejected tls sni '" + domain + "'");
-                console.error("[Error] (see https://git.coolaj86.com/coolaj86/greenlock.js/issues/11)");
+                let message = `   🔒    ❨@small-tech/https❩ Rejecting SNI request from ‘${domain}’`
+                if (domain === 'localhost') {
+                  message = `${message} (Do you have a browser tab open at https://localhost?)`;
+                }
+                console.log(message)
                 if ('E_REJECT_SNI' !== _err.code) {
-                  console.error("[Error] This is the rejection message:");
+                  console.error("   🔒    ❨@small-tech/https❩ SNI Error:");
                   console.error(_err.message);
                 }
-                console.error("");
+                // console.error("");
               }
               cb(_err);
               return;
@@ -463,7 +464,7 @@ Greenlock.create = function (gl) {
                   cb(null, certs);
                 }
               , function (e) {
-                  console.debug("Error renewing certificate for '" + domain + "':");
+                  console.debug("   🔒    ❨@small-tech/https❩ Error renewing certificate for '" + domain + "':");
                   console.debug(e);
                   console.error("");
                   cb(e);
@@ -479,7 +480,7 @@ Greenlock.create = function (gl) {
                   cb(null, certs);
                 }
               , function (e) {
-                  console.debug("Error loading/registering certificate for '" + domain + "':");
+                  console.debug("   🔒    ❨@small-tech/https❩ Error loading/registering certificate for '" + domain + "':");
                   console.debug(e);
                   console.error("");
                   cb(e);
@@ -488,9 +489,8 @@ Greenlock.create = function (gl) {
             }
           });
         } catch(e) {
-          console.error("[ERROR] Something went wrong in approveDomains:");
+          console.error("   🔒    ❨@small-tech/https❩ Error: Something went wrong in approveDomains:");
           console.error(e);
-          console.error("BUT WAIT! Good news: It's probably your fault, so you can probably fix it.");
         }
       };
     }
@@ -514,7 +514,7 @@ Greenlock.create = function (gl) {
       try {
         gl.sni.sniCallback(gl.__sni_preserve_case && _domain || domain, cb);
       } catch(e) {
-        console.error("[ERROR] Something went wrong in the SNICallback:");
+        console.error("   🔒    ❨@small-tech/https❩ ERROR: Something went wrong in the SNICallback:");
         console.error(e);
         cb(e);
       }
@@ -597,8 +597,8 @@ Greenlock.create = function (gl) {
           }
         } else if (safehost && !gl.middleware.sanitizeHost._skip_fronting_check) {
           // TODO how to handle wrapped sockets, as with telebit?
-          console.warn("\n\n\n[ACME TLS] WARN: no string for req.socket.servername,"
-            + " skipping fronting check for '" + safehost + "'\n\n\n");
+          console.warn("   🔒    ❨@small-tech/https❩ Warning: no string for req.socket.servername,"
+            + " skipping fronting check for '" + safehost + "'");
           gl.middleware.sanitizeHost._skip_fronting_check = true;
         }
       }
