@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.7] - 2020-02-09
+
+### Changed
+
+  - Update console output format to match the one used in Site.js (cosmetic).
+
 ## [1.0.6] - 2019-11-26
 
 ### Fixed
