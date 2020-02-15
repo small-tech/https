@@ -48,6 +48,13 @@ function _log(debug) {
   }
 }
 
+function smallTechLog(...args) {
+  if (process.env.QUIET) {
+    return
+  }
+  console.log(...args)
+}
+
 Greenlock.defaults = {
   productionServerUrl: 'https://acme-v02.api.letsencrypt.org/directory'
 , stagingServerUrl: 'https://acme-staging-v02.api.letsencrypt.org/directory'
@@ -119,7 +126,7 @@ Greenlock.createServer = function(options, requestListener) {
       //
       // Create server to respond to requested hostnames with globally-trusted certificates.
       //
-      console.log('   🔒    ❨@small-tech/https❩ Creating server with globally-trusted Let’s Encrypt certificates.')
+      smallTechLog('   🔒    ❨@small-tech/https❩ Creating server with globally-trusted Let’s Encrypt certificates.')
 
       // If a certificate directory is provided, use that.
       if (options.certificateDirectory != null) {
@@ -146,7 +153,7 @@ Greenlock.createServer = function(options, requestListener) {
       //
       // Default: create server at localhost with locally-trusted certificates.
       //
-      console.log('   🔒    ❨@small-tech/https❩ Creating server at localhost with locally-trusted certificates.')
+      smallTechLog('   🔒    ❨@small-tech/https❩ Creating server at localhost with locally-trusted certificates.')
 
       // If a certificateDirectory is requested, use that. Otherwise, use default (~/.nodecert).
       if (options.certificateDirectory != null) {
@@ -177,9 +184,9 @@ Greenlock.createServer = function(options, requestListener) {
     // server we expose publicly)
     if (httpServer !== null) {
       httpServer.on('error', error => {
-        console.log('\n   🤯    ❨@small-tech/https❩ Error: could not start HTTP server for @small-tech/https.\n')
+        smallTechLog('\n   🤯    ❨@small-tech/https❩ Error: could not start HTTP server for @small-tech/https.\n')
         if (error.code === 'EADDRINUSE') {
-          console.log(`   💥    ❨@small-tech/https❩ Port 80 is already in use.\n`)
+          smallTechLog(`   💥    ❨@small-tech/https❩ Port 80 is already in use.\n`)
         }
         // We emit this on the httpsServer that is returned so that the calling
         // party can listen for the event on the returned server instance. (We do
@@ -189,11 +196,11 @@ Greenlock.createServer = function(options, requestListener) {
       })
 
       httpServer.listen(80, () => {
-        console.log('   🔒    ❨@small-tech/https❩ HTTP → HTTPS redirection active.')
+        smallTechLog('   🔒    ❨@small-tech/https❩ HTTP → HTTPS redirection active.')
       })
     }
 
-    console.log('   🔒    ❨@small-tech/https❩ Created HTTPS server.')
+    smallTechLog('   🔒    ❨@small-tech/https❩ Created HTTPS server.')
 
     return server
   }
@@ -275,9 +282,9 @@ Greenlock.create = function (gl) {
 
   if (gl.staging !== true) {
     gl.server = Greenlock.defaults.productionServerUrl
-    console.log('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt production server.')
+    smallTechLog('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt production server.')
   } else {
-    console.log('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt staging server.')
+    smallTechLog('   🔒    ❨@small-tech/https❩ Using Let’s Encrypt staging server.')
     gl.server = Greenlock.defaults.stagingServerUrl
     gl.debug = true
   }
@@ -441,7 +448,7 @@ Greenlock.create = function (gl) {
                 if (domain === 'localhost') {
                   message = `${message} (Do you have a browser tab open at https://localhost?)`;
                 }
-                console.log(message)
+                smallTechLog(message)
                 if ('E_REJECT_SNI' !== _err.code) {
                   console.error("   🔒    ❨@small-tech/https❩ SNI Error:");
                   console.error(_err.message);

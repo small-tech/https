@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+Nothing yet.
+
+## [1.1.0] - 2020-02-15
+
+### Added
+
+  - Support for QUIET=true environment variable for what was previously console.log() output.
+
 ## [1.0.9] - 2020-02-09
 
 ### Changed
