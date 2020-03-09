@@ -21,7 +21,7 @@ We exist in part thanks to patronage by people like you. If you share [our visio
 
 This is [small technology](https://small-tech.org/about/#small-technology).
 
-If you’re evaluating this for a “startup” or an enterprise, let us save you some time: this is not the right tool for you. This is individual developers to build personal web sites and apps for themselves and for others.
+If you’re evaluating this for a “startup” or an enterprise, let us save you some time: this is not the right tool for you. This tool is for individual developers to build personal web sites and apps for themselves and for others in a non-colonial manner that respects the human rights of the people who use them.
 
 ## Platform support
 
