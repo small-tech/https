@@ -15,15 +15,13 @@ This is basically a batteries-included version of the standard Node.js `https` m
 
 [Small Technology Foundation](https://small-tech.org) is a tiny, independent not-for-profit.
 
-We exist in part thanks to patronage by people like you. If you share [our vision](https://small-tech.org/about#small-technology) and want to support our work, please [become a patron or donate to us](https://small-tech.org/fund-us) today and help us continue to exist.
+We exist in part thanks to patronage by people like you. If you share [our vision](https://small-tech.org/about/#small-technology) and want to support our work, please [become a patron or donate to us](https://small-tech.org/fund-us) today and help us continue to exist.
 
 ## Audience
 
-This is [small technology](https://small-tech.org/about#small-technology).
+This is [small technology](https://small-tech.org/about/#small-technology).
 
 If you’re evaluating this for a “startup” or an enterprise, let us save you some time: this is not the right tool for you. This is individual developers to build personal web sites and apps for themselves and for others.
-
-Like this? fund our two-person not for profit so we can keep working on projects like this.
 
 ## Platform support
 
