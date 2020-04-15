@@ -1,6 +1,6 @@
 # @small-tech/https
 
-Drop in replacement for Node https module that automatically handles certificate provisioning and renewal both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).
+Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Auto Encrypt Localhost/mkcert) and at hostname (via Auto Encrypt/Let’s Encrypt).
 
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
@@ -15,15 +15,13 @@ This is basically a batteries-included version of the standard Node.js `https` m
 
 [Small Technology Foundation](https://small-tech.org) is a tiny, independent not-for-profit.
 
-We exist in part thanks to patronage by people like you. If you share [our vision](https://small-tech.org/about#small-technology) and want to support our work, please [become a patron or donate to us](https://small-tech.org/fund-us) today and help us continue to exist.
+We exist in part thanks to patronage by people like you. If you share [our vision](https://small-tech.org/about/#small-technology) and want to support our work, please [become a patron or donate to us](https://small-tech.org/fund-us) today and help us continue to exist.
 
 ## Audience
 
-This is [small technology](https://small-tech.org/about#small-technology).
+This is [small technology](https://small-tech.org/about/#small-technology).
 
-If you’re evaluating this for a “startup” or an enterprise, let us save you some time: this is not the right tool for you. This is individual developers to build personal web sites and apps for themselves and for others.
-
-Like this? fund our two-person not for profit so we can keep working on projects like this.
+If you’re evaluating this for a “startup” or an enterprise, let us save you some time: this is not the right tool for you. This tool is for individual developers to build personal web sites and apps for themselves and for others in a non-colonial manner that respects the human rights of the people who use them.
 
 ## Platform support
 
@@ -80,11 +78,12 @@ Here’s a basic Express “hello, world” app that shows you how this module c
 
     let options = {}
 
-    // For globally-trusted Let’s Encrypt certificates uncomment options.
+    // For globally-trusted Let’s Encrypt certificates uncomment the following section.
     // To provision certificates, also remove “staging: true” property.
 
+    // const os = require('os')
     // options = {
-    //   domain: 'hostname',
+    //   domains: [os.hostname()],
     //   staging: true
     // }
 
@@ -120,7 +119,7 @@ You can find a version of this example in the `/example` folder. To download and
 
 ```sh
 # Clone this repository.
-git clone https://source.ind.ie/site.js/lib/https.git
+git clone https://source.small-tech.org/site.js/lib/https.git
 
 # Switch to the directory.
 cd https
@@ -132,36 +131,12 @@ npm i
 npm run example
 ```
 
-## History
+## Copyright
 
-This project was initially a spike aimed at creating a mono-repo of the following modules from the Greenlock project to make it easier to maintain our fork which removed telemetry, marketing, etc., from the original project and to focus it on a single use case of automatically provisioning Let’s Encrypt certificates using just the HTTP-01 challenge method:
+&copy; 2020 [Aral Balkan](https://ar.al), [Small Technology Foundation](https://small-tech.org).
 
-  - acme-tls (fork of Greenlock v2)
-  - acme-v2
-  - acme
-  - cert-info
-  - le-challenge-fs
-  - le-sni-auto
-  - le-store-certbot
-  - mkdirp
-  - urequest
+Let’s Encrypt is a trademark of the Internet Security Research Group (ISRG). All rights reserved. Node.js is a trademark of Joyent, Inc. and is used with its permission. We are not endorsed by or affiliated with Joyent or ISRG.
 
-You can find the original licenses in [lib/licenses/](lib/licenses/) and the original documentation for the modules (some of which may be outdated now) in [lib/docs](lib/docs).
+## License
 
-The project has since evolved and merged with [nodecert](https://source.ind.ie/hypha/tools/nodecert) and parts of [Site.js](https://sitejs.org) to create an isomorphic replacement for the Node.js `https` module that automatically provisions both locally-trusted certificates for use at localhost and globally-trusted certificates at fully-qualified domain names.
-
-## Credits
-
-The Let’s Encrypt functionality is based on Greenlock by AJ ONeal (minus the telemetry, marketing, and artificial email address requirement that was added to Let’s Encrypt by the original module).
-
-## Copyright & licenses
-
-Portions copyright &copy; Aral Balkan, Small Technology Foundation. Portions copyright other authors as listed in the various license files.
-
-Portions:
-
-  - AGPL version 3.0 or later
-  - Mozilla Public License 2.0
-  - MIT
-
-See [lib/licenses/](lib/licenses/)
+[AGPL version 3.0 or later.](https://www.gnu.org/licenses/agpl-3.0.en.html)
