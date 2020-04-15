@@ -1,7 +1,7 @@
 {
   "name": "@small-tech/https",
   "version": "1.2.0",
-  "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Auto Encrypt Localhost/mkcert) and at hostname (via Auto Encrypt/Let’s Encrypt).",
+  "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

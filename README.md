@@ -1,6 +1,6 @@
 # @small-tech/https
 
-Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Auto Encrypt Localhost/mkcert) and at hostname (via Auto Encrypt/Let’s Encrypt).
+A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.
 
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
@@ -130,6 +130,34 @@ npm i
 # Run the example.
 npm run example
 ```
+
+## Related projects
+
+Lower-level:
+
+### Auto Encrypt
+
+  - Source: https://source.small-tech.org/site.js/lib/auto-encrypt
+  - Package: [@small-tech/auto-encrypt](https://www.npmjs.com/package/@small-tech/auto-encrypt)
+
+Adds automatic provisioning and renewal of [Let’s Encrypt](https://letsencrypt.org) TLS certificates with [OCSP Stapling](https://letsencrypt.org/docs/integration-guide/#implement-ocsp-stapling) to [Node.js](https://nodejs.org) [https](https://nodejs.org/dist/latest-v12.x/docs/api/https.html) servers (including [Express.js](https://expressjs.com/), etc.)
+
+### Auto Encrypt Localhost
+
+  - Source: https://source.small-tech.org/site.js/lib/auto-encrypt-localhost
+  - Package: [@small-tech/auto-encrypt-localhost](https://www.npmjs.com/package/@small-tech/auto-encrypt-localhost)
+
+Automatically provision trusted development-time (localhost) certificates in Node.js without browser errors via [mkcert](https://github.com/FiloSottile/mkcert).  __TODO: add URL after migrating the project (previously called nodecert)__.
+
+Higher level:
+
+### Site.js
+
+  - Web site: https://sitejs.org
+  - Source: https://source.small-tech.org/site.js/app
+
+A complete [small technology](https://small-tech.org/about/#small-technology) tool for developing, testing, and deploying a secure static or dynamic personal web site or app with zero configuration.
+
 
 ## Copyright
 
