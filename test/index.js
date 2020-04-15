@@ -94,5 +94,28 @@ test('@small-tech/https', async t => {
   // Test subsequent run (certificate material provided from disk).
   await testLocalAndGlobalServer(t, /* customSettingsPath = */ true)
 
+  // Test alternative function signature (no options object).
+  const localServer = https.createServer((request, response) => {
+    response.end('local server listener set ok')
+  })
+
+  await new Promise((resolve, reject) => {
+    localServer.listen(443, () => {
+      resolve()
+    })
+  })
+
+  const localServerResponse = await getHttpsString('https://localhost')
+
+  t.strictEquals(localServerResponse, 'local server listener set ok', 'alternative function signature works as expected')
+
+  localServer.close()
+
+  await new Promise((resolve, reject) => {
+    localServer.on('close', () => {
+      resolve()
+    })
+  })
+
   t.end()
 })
