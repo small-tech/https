@@ -147,7 +147,7 @@ Adds automatic provisioning and renewal of [Let’s Encrypt](https://letsencrypt
   - Source: https://source.small-tech.org/site.js/lib/auto-encrypt-localhost
   - Package: [@small-tech/auto-encrypt-localhost](https://www.npmjs.com/package/@small-tech/auto-encrypt-localhost)
 
-Automatically provision trusted development-time (localhost) certificates in Node.js without browser errors via [mkcert](https://github.com/FiloSottile/mkcert).  __TODO: add URL after migrating the project (previously called nodecert)__.
+Automatically provisions and installs locally-trusted TLS certificates for Node.js https servers (including Express.js, etc.) using [mkcert](https://github.com/FiloSottile/mkcert/).
 
 Higher level:
 
@@ -157,7 +157,6 @@ Higher level:
   - Source: https://source.small-tech.org/site.js/app
 
 A complete [small technology](https://small-tech.org/about/#small-technology) tool for developing, testing, and deploying a secure static or dynamic personal web site or app with zero configuration.
-
 
 ## Copyright
 
