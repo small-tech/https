@@ -1,23 +1,16 @@
 {
   "name": "@small-tech/https",
-  "version": "1.1.0",
-  "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Nodecert/mkcert) and at hostname (via Let’s Encrypt).",
+  "version": "1.2.0",
+  "description": "Drop in replacement for Node https module that automatically handles certificate provisioning both at localhost (via Auto Encrypt Localhost/mkcert) and at hostname (via Auto Encrypt/Let’s Encrypt).",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "node example/"
   },
   "author": "Aral Balkan <aral@small-tech.org> (https://ar.al)",
-  "contributors": [
-    "AJ ONeal (https://github.com/solderjs)"
-  ],
-  "license": "Portions AGPL-3.0-or-later, MPL 2.0, and MIT",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@ind.ie/nodecert": "^3.1.7",
-    "@ind.ie/rsa-compat": "^1.0.0",
-    "@small-tech/cross-platform-hostname": "^1.0.0",
-    "express": "^4.17.1",
-    "pyconf": "^1.1.7",
-    "safe-replace": "^1.1.0"
+    "@small-tech/auto-encrypt": "file:../auto-encrypt",
+    "@small-tech/auto-encrypt-localhost": "file:../auto-encrypt-localhost"
   }
 }
