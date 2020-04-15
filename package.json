@@ -3,14 +3,22 @@
   "version": "1.2.0",
   "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
+  "funding": {
+    "type": "foundation",
+    "url": "https://small-tech.org/fund-us/"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "node example/"
   },
-  "author": "Aral Balkan <aral@small-tech.org> (https://ar.al)",
+  "author": {
+    "name": "Aral Balkan",
+    "email": "aral@small-tech.org",
+    "url": "https://ar.al"
+  },
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@small-tech/auto-encrypt": "file:../auto-encrypt",
-    "@small-tech/auto-encrypt-localhost": "file:../auto-encrypt-localhost"
+    "@small-tech/auto-encrypt": "^1.0.0",
+    "@small-tech/auto-encrypt-localhost": "^5.0.2"
   }
 }
