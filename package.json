@@ -1,11 +1,15 @@
 {
   "name": "@small-tech/https",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
   "funding": {
     "type": "foundation",
     "url": "https://small-tech.org/fund-us/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://source.small-tech.org/site.js/lib/https.git"
   },
   "scripts": {
     "example": "node example/",
