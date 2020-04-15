@@ -8,8 +8,13 @@
     "url": "https://small-tech.org/fund-us/"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "example": "node example/"
+    "example": "node example/",
+    "test": "QUIET=true tape 'test/**/*.js' | tap-spec",
+    "coverage": "QUIET=true nyc tape 'test/**/*.js' | tap-nyc",
+    "test-debug": "tape 'test/**/*.js' | tap-spec",
+    "coverage-debug": "nyc tape 'test/**/*.js' | tap-nyc",
+    "generate-dependency-diagram": "mkdir -p artefacts && node_modules/.bin/depcruise --max-depth 1 --output-type dot index.js | dot -T svg > artefacts/dependency-graph.svg",
+    "generate-developer-documentation": "npm run generate-dependency-diagram && node_modules/.bin/jsdoc2md --private --template developer-documentation.hbs --files index.js > developer-documentation.md"
   },
   "author": {
     "name": "Aral Balkan",
@@ -20,5 +25,24 @@
   "dependencies": {
     "@small-tech/auto-encrypt": "^1.0.0",
     "@small-tech/auto-encrypt-localhost": "^5.0.2"
+  },
+  "devDependencies": {
+    "@small-tech/cross-platform-hostname": "^1.0.0",
+    "bent": "^7.3.0",
+    "dependency-cruiser": "^8.1.0",
+    "fs-extra": "^9.0.0",
+    "jsdoc": "^3.6.3",
+    "jsdoc-to-markdown": "^5.0.3",
+    "nyc": "^14.1.1",
+    "tap-nyc": "^1.0.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.13.0",
+    "wtfnode": "^0.8.1"
+  },
+  "nyc": {
+    "exclude": [
+      "test/**/*.js",
+      "lib/util/*.js"
+    ]
   }
 }
