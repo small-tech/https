@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 Nothing yet.
 
+## [1.2.2] - 2020-04-16
+
+### Added
+
+  - Minor: clean up old (pre-version-1.2.0) certificate folders at startup.
+
 ## [1.2.1] - 2020-04-15
 
 ### Added

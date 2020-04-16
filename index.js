@@ -1,3 +1,4 @@
+const fs                   = require('fs-extra')
 const os                   = require('os')
 const path                 = require('path')
 const https                = require('https')
@@ -20,7 +21,9 @@ smallTechHttps.createServer = function (options, listener) {
     const defaultSettingsPath = path.join(os.homedir(), '.small-tech.org', 'https')
     const serverScope = options.domains == undefined || options.domains.includes('localhost') ? 'local' : 'global'
 
-    options.settingsPath = options.settingsPath ? path.join(path.resolve(options.settingsPath), serverScope) : path.join(defaultSettingsPath, serverScope)
+    const settingsPath = options.settingsPath ? path.join(path.resolve(options.settingsPath), serverScope) : path.join(defaultSettingsPath, serverScope)
+
+    options.settingsPath = settingsPath
 
     if (options.staging) { options.serverType = AUTO_ENCRYPT_STAGING_SERVER_TYPE }
     delete options.staging
@@ -39,8 +42,17 @@ smallTechHttps.createServer = function (options, listener) {
     const server = autoEncryptScope[serverScope].https.createServer(options, listener)
 
     if (serverScope === 'global') {
+      // Migration: 1.1.0 and earlier to 1.2.0+:
+      // Remove the old Let’s Encrypt client’s certificate settings.
+      // (And thus force upgrade to certificates managed by Auto Encrypt on first hit of server.)
+      const oldLetsEncryptSettingsPathFor = directory => path.join(settingsPath, directory)
+      fs.removeSync(oldLetsEncryptSettingsPathFor('accounts'))
+      fs.removeSync(oldLetsEncryptSettingsPathFor('archive'))
+      fs.removeSync(oldLetsEncryptSettingsPathFor('live'))
+      fs.removeSync(oldLetsEncryptSettingsPathFor('renewal'))
+
+      // Allow AutoEncrypt to perform clean-up (e.g., remove interval timer for renewal check, etc.)
       server.on('close', () => {
-        // Allow AutoEncrypt to perform clean-up (e.g., remove interval timer for renewal check, etc.)
         AutoEncrypt.shutdown()
       })
     }

@@ -12,7 +12,8 @@ const DEFAULT_SETTINGS_PATH = path.join(os.homedir(), '.small-tech.org', 'https'
 const CUSTOM_SETTINGS_PATH  = path.join(DEFAULT_SETTINGS_PATH, 'test')
 
 function setup () {
-  fs.removeSync(DEFAULT_SETTINGS_PATH)
+  fs.removeSync(path.join(DEFAULT_SETTINGS_PATH, 'global', 'staging'))
+  fs.removeSync(CUSTOM_SETTINGS_PATH)
 }
 
 async function testLocalAndGlobalServer (t, customSettingsPath = false) {
