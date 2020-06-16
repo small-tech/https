@@ -38,7 +38,7 @@ smallTechHttps.createServer = function (options, listener) {
       global: AutoEncrypt
     }
 
-    log(`   🔒    ❨@small-tech/https❩ Creating server ${logMessage[serverScope]}.`)
+    log(`   🔒    ❨https❩ Creating server ${logMessage[serverScope]}.`)
     const server = autoEncryptScope[serverScope].https.createServer(options, listener)
 
     if (serverScope === 'global') {
@@ -57,7 +57,7 @@ smallTechHttps.createServer = function (options, listener) {
       })
     }
 
-    log('   🔒    ❨@small-tech/https❩ Created HTTPS server.')
+    log('   🔒    ❨https❩ Created HTTPS server.')
     return server
 }
 
