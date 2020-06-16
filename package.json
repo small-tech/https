@@ -28,8 +28,8 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "@small-tech/auto-encrypt": "^1.0.0",
-    "@small-tech/auto-encrypt-localhost": "^5.0.2"
+    "@small-tech/auto-encrypt": "^1.0.1",
+    "@small-tech/auto-encrypt-localhost": "^5.1.1"
   },
   "devDependencies": {
     "@small-tech/cross-platform-hostname": "^1.0.0",
