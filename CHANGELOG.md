@@ -4,14 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.5] - 2020-06-20
+
+### Changed
+
+  - Update to auto-encrypt version 1.0.3 with fix for carriage returns in CSRs causing some certificate provisioning attempts to fail.
+
 ## [1.2.4] - 2020-06-16
 
 ### Changed
 
   - Updated auto-encrypt to version 1.0.2 and auto-encrypt localhost to version 5.1.2 (fixes and cosmetic improvements).
-
-### Fixed
-
 
 ## [1.2.3] - 2020-06-16
 

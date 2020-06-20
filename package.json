@@ -1,6 +1,6 @@
 {
   "name": "@small-tech/https",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
   "funding": {
@@ -28,7 +28,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "@small-tech/auto-encrypt": "^1.0.2",
+    "@small-tech/auto-encrypt": "^1.0.3",
     "@small-tech/auto-encrypt-localhost": "^5.1.2"
   },
   "devDependencies": {
