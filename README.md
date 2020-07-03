@@ -6,6 +6,7 @@ Simply replace Node’s `https` module with `@small-tech/https` and get:
 
   - Automatically-provisioned TLS certificates at localhost with no browser warnings.
   - Automatically-provisioned TLS certificates at hostname via Let’s Encrypt.
+  - Automatic HTTP to HTTPS forwarding at hostname.
 
 That’s it.
 
