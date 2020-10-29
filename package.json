@@ -1,24 +1,34 @@
 {
   "name": "@small-tech/https",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
+  "keywords": [
+    "let's encrypt",
+    "acme",
+    "http-01",
+    "https",
+    "tls",
+    "auto encrypt",
+    "auto encrypt localhost",
+    "small tech",
+    "small web",
+    "automatic"
+  ],
   "funding": {
     "type": "foundation",
     "url": "https://small-tech.org/fund-us/"
   },
   "repository": {
     "type": "git",
-    "url": "https://source.small-tech.org/site.js/lib/https.git"
+    "url": "https://github.com/small-tech/https.git"
   },
   "scripts": {
     "example": "node example/",
     "test": "QUIET=true tape 'test/**/*.js' | tap-spec",
     "coverage": "QUIET=true nyc tape 'test/**/*.js' | tap-nyc",
     "test-debug": "tape 'test/**/*.js' | tap-spec",
-    "coverage-debug": "nyc tape 'test/**/*.js' | tap-nyc",
-    "generate-dependency-diagram": "mkdir -p artefacts && node_modules/.bin/depcruise --max-depth 1 --output-type dot index.js | dot -T svg > artefacts/dependency-graph.svg",
-    "generate-developer-documentation": "npm run generate-dependency-diagram && node_modules/.bin/jsdoc2md --private --template developer-documentation.hbs --files index.js > developer-documentation.md"
+    "coverage-debug": "nyc tape 'test/**/*.js' | tap-nyc"
   },
   "author": {
     "name": "Aral Balkan",
@@ -27,16 +37,13 @@
   },
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^9.0.1",
     "@small-tech/auto-encrypt": "^2.0.5",
     "@small-tech/auto-encrypt-localhost": "^5.4.1"
   },
   "devDependencies": {
     "@small-tech/cross-platform-hostname": "^1.0.0",
     "bent": "^7.3.12",
-    "dependency-cruiser": "^9.15.1",
-    "jsdoc": "^3.6.6",
-    "jsdoc-to-markdown": "^6.0.1",
     "nyc": "^15.1.0",
     "tap-nyc": "^1.0.3",
     "tap-spec": "https://github.com/small-tech/tap-spec",
