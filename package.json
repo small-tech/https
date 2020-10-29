@@ -28,7 +28,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "@small-tech/auto-encrypt": "^2.0.4",
+    "@small-tech/auto-encrypt": "^2.0.5",
     "@small-tech/auto-encrypt-localhost": "^5.4.1"
   },
   "devDependencies": {
