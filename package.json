@@ -40,7 +40,7 @@
     "nyc": "^15.1.0",
     "tap-nyc": "^1.0.3",
     "tap-spec": "https://github.com/small-tech/tap-spec",
-    "tape": "^4.13.0",
+    "tape": "^5.0.1",
     "wtfnode": "^0.8.1"
   },
   "nyc": {
