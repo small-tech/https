@@ -28,19 +28,19 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "fs-extra": "^9.0.0",
-    "@small-tech/auto-encrypt": "^2.0.4",
+    "@small-tech/auto-encrypt": "^2.0.5",
     "@small-tech/auto-encrypt-localhost": "^5.4.1"
   },
   "devDependencies": {
     "@small-tech/cross-platform-hostname": "^1.0.0",
-    "bent": "^7.3.0",
-    "dependency-cruiser": "^8.1.0",
-    "jsdoc": "^3.6.3",
-    "jsdoc-to-markdown": "^5.0.3",
-    "nyc": "^14.1.1",
+    "bent": "^7.3.12",
+    "dependency-cruiser": "^9.15.1",
+    "jsdoc": "^3.6.6",
+    "jsdoc-to-markdown": "^6.0.1",
+    "nyc": "^15.1.0",
     "tap-nyc": "^1.0.3",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.13.0",
+    "tap-spec": "https://github.com/small-tech/tap-spec",
+    "tape": "^5.0.1",
     "wtfnode": "^0.8.1"
   },
   "nyc": {
