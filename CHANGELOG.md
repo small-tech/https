@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2020-11-04
+
+### Changed
+
+  - Upgrade auto-encrypt-localhost to version 6.1.0. (This upgrades mkcert to 1.4.2 and includes the new separate mkcert arm64 binary.)
+
 ## [2.0.0] - 2020-11-03
 
 ### Changed
