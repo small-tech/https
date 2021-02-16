@@ -34,6 +34,60 @@ Works on Linux, macOS, and Windows (WSL is not supported for certificates at loc
 npm i @small-tech/https
 ```
 
+## Examples
+
+### At localhost with automatically-provisioned development certificates via mkcert.
+
+```js
+import https from '@small-tech/https'
+
+const server = https.createServer((request, response) => {
+  response.end('Hello, world!')
+})
+
+server.listen(443, () => {
+  console.log(' 🎉 Server running at https://localhost.')
+})
+```
+
+Hit `https://localhost` and you should see your site with locally-trusted TLS certificates.
+
+### At hostname with automatically-provisioned Let’s Encrypt certificates.
+
+```js
+import https from '@small-tech/https'
+import os form 'os'
+
+const hostname = os.hostname()
+const options = { domains: [hostname] }
+
+const server = https.createServer((request, response) => {
+  response.end('Hello, world!')
+})
+
+server.listen(443, () => {
+  console.log(` 🎉 Server running at https://${hostname}.`)
+})
+```
+
+To provision globally-trusted Let’s Encrypt certificates, we additionally create an `options` object containing the domain(s) we want to support, and pass it as the first argument in the `createServer()` method.
+
+You can find a version of this example in the `/example` folder. To download and run that version:
+
+```sh
+# Clone this repository.
+git clone https://source.small-tech.org/site.js/lib/https.git
+
+# Switch to the directory.
+cd https
+
+# Install dependencies.
+npm i
+
+# Run the example.
+npm run example
+```
+
 ## A note on Linux and the security farce that is “privileged ports”
 
 Linux has an outdated feature dating from the mainframe days that requires a process that wants to bind to ports < 1024 to have elevated privileges. While this was a security feature in the days of dumb terminals, today it is a security anti-feature. (macOS has dropped this requirement as of macOS Mojave.)
@@ -51,92 +105,6 @@ sudo setcap cap_net_bind_service=+ep $(which node)
 ```
 
 If you are wrapping your Node app into an executable binary using a module like [Nexe](https://github.com/nexe/nexe), you will have to ensure that every build of your app has that capability set. For an example of how we do this in [Site.js](https://sitejs.org), [see this listing](https://source.ind.ie/site.js/app/blob/master/bin/lib/ensure.js#L124).
-
-## Example
-
-Here’s a basic Express “hello, world” app that shows you how this module can be used. Note that you don’t need express to use it.
-
-1. ### Set up:
-
-    ```sh
-    # Create the project folder and switch to it.
-    mkdir example && cd example
-
-    # Create a new npm module for the example.
-    npm init --yes
-
-    # Install dependencies.
-    npm i @small-tech/https express
-
-    # Open up the main file in your default editor.
-    $EDITOR index.js
-    ```
-
-2. ### Code (index.js):
-
-    ```javascript
-    const https = require('..')
-
-    // Helpers
-    function html(message) {
-      return `<!doctype html><html lang='en'><head><meta charset='utf-8'/><title>Hello, world!</title><style>body{background-color: white; font-family: sans-serif;}</style></head><body><h1>${message}</h1></body></html>`
-    }
-    const contentTypeHTML = {'Content-Type': 'text/html'}
-
-    let options = {}
-
-    // For globally-trusted Let’s Encrypt certificates uncomment the following section.
-    // To provision certificates, also remove “staging: true” property.
-
-    // const os = require('os')
-    // options = {
-    //   domains: [os.hostname()],
-    //   staging: true
-    // }
-
-    // Create HTTPS server at https://localhost
-    // with locally-trusted certificates.
-    const server = https.createServer(options, (request, response) => {
-      if (request.method !== 'GET') {
-        response.writeHead(404, contentTypeHTML)
-        response.end(html('Not found.'))
-        return
-      }
-      // Respond to all routes with the same page.
-      response.writeHead(200, contentTypeHTML)
-      response.end(html('Hello, world!'))
-    })
-
-    server.listen(443, () => {
-      console.log(' 🎉 Server running on port 443.')
-    })
-    ```
-
-3. ### Run:
-
-    ```sh
-    node index
-    ```
-
-Hit `https://localhost` and you should see your site with locally-trusted TLS certificates.
-
-To provision globally-trusted Let’s Encrypt certificates instead, uncomment the `options` object and pass it as the first argument in the `createServer()` method.
-
-You can find a version of this example in the `/example` folder. To download and run that version:
-
-```sh
-# Clone this repository.
-git clone https://source.small-tech.org/site.js/lib/https.git
-
-# Switch to the directory.
-cd https
-
-# Install dependencies.
-npm i
-
-# Run the example.
-npm run example
-```
 
 ## Related projects
 
