@@ -4,14 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - in-progress
+## [3.0.0] - 2021-03-09
+
+__Breaking change:__ ESM version. Includes Auto Encrypt 3.0.0 and Auto Encrypt Localhost 7.0.2.
 
 ## Changed
 
-  - __Breaking change:__ update Auto Encrypt Localhost to version 7.0.2 (the mkcert binaries are no longer bundled).
-  - Update Auto Encrypt to version 2.1.0.
-  - Is now an ECMAScript Module (ESM; es6 module).
+  - Uses ECMAScript Modules (ESM; es6 modules).
+  - Upgraded Auto Encrypt to version 3.0.0 (ESM + includes the latest Let’s Encrypt staging certificate authority root certificate for testing).
+  - Upgraded Auto Encrypt Localhost to version 7.0.2 (the mkcert binaries are no longer bundled).
   - Testing and coverage: migrate from using nyc, tap-spec, and tap-nyc to c8 and tap-monkey.
+  - Reduce npm package size by specifying files whitelist.
 
 ## [2.1.1] - 2021-02-16
 
