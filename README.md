@@ -12,6 +12,8 @@ That’s it.
 
 This is basically a batteries-included version of the standard Node.js `https` module.
 
+___Note:__ This is a standard ECMAScript Modules (ESM; es6 modules) project. If you need to use legacy CommonJS, [please see the 2.x branch](https://github.com/small-tech/https/tree/2.x) which is currently still being maintained._
+
 ## Like this? Fund us!
 
 [Small Technology Foundation](https://small-tech.org) is a tiny, independent not-for-profit.

@@ -1,10 +1,10 @@
-const os       = require('os')
-const path     = require('path')
-const fs       = require('fs-extra')
-const test     = require('tape')
-const https    = require('..')
-const bent     = require('bent')
-const hostname = require('@small-tech/cross-platform-hostname')
+import os from 'os'
+import path from 'path'
+import fs from 'fs-extra'
+import test from 'tape'
+import bent from 'bent'
+import hostname from '@small-tech/cross-platform-hostname'
+import https from '../index.js'
 
 const getHttpsString = bent('GET', 'string')
 

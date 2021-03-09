@@ -1,4 +1,4 @@
-const https = require('..')
+import https from '../index.js'
 
 // Helpers
 function html(message) {
