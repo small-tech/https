@@ -41,7 +41,7 @@ npm i @small-tech/https
 ### At localhost with automatically-provisioned development certificates via mkcert.
 
 ```js
-const https = require('@small-tech/https')
+import https from '@small-tech/https'
 
 const server = https.createServer((request, response) => {
   response.end('Hello, world!')
@@ -57,8 +57,8 @@ Hit `https://localhost` and you should see your site with locally-trusted TLS ce
 ### At hostname with automatically-provisioned Let’s Encrypt certificates.
 
 ```js
-const https = require('@small-tech/https')
-const os = require('os')
+import https from '@small-tech/https'
+import os form 'os'
 
 const hostname = os.hostname()
 const options = { domains: [hostname] }
