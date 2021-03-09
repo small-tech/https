@@ -1,10 +1,10 @@
-const fs                   = require('fs-extra')
-const os                   = require('os')
-const path                 = require('path')
-const https                = require('https')
-const log                  = require('./lib/util/log')
-const AutoEncrypt          = require('@small-tech/auto-encrypt')
-const AutoEncryptLocalhost = require('@small-tech/auto-encrypt-localhost')
+import os from 'os'
+import fs from 'fs-extra'
+import path from 'path'
+import https from 'https'
+import AutoEncrypt from '@small-tech/auto-encrypt'
+import AutoEncryptLocalhost from '@small-tech/auto-encrypt-localhost'
+import log from './lib/util/log.js'
 
 const AUTO_ENCRYPT_STAGING_SERVER_TYPE = 1
 
@@ -61,4 +61,4 @@ smallTechHttps.createServer = function (options, listener) {
     return server
 }
 
-module.exports = smallTechHttps
+export default smallTechHttps
