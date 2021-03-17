@@ -36,6 +36,10 @@ Works on Linux, macOS, and Windows (WSL is not supported for certificates at loc
 npm i @small-tech/https
 ```
 
+Note that during installation, this module’s Auto Encrypt Localhost dependency will create your local certificate authority and install it in the system root store and generate locally-trusted certificates. These actions require elevated privileges (`sudo`). Since [npm does not handle sudo prompts correctly in lifecycle scripts](https://github.com/npm/cli/issues/2887), you will see a graphical sudo prompt pop up to ask you for your adminstrator password. Once you’ve provided it, installation will proceed as normal.
+
+![Screenshot of graphical sudo prompt “Authentication required: Authentication is needed to run /bin/bash as the super user”](https://small-tech.org/images/graphical-sudo-prompt.png)
+
 ## Examples
 
 ### At localhost with automatically-provisioned development certificates via mkcert.
