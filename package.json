@@ -43,7 +43,7 @@
   },
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@small-tech/auto-encrypt": "^3.0.0",
+    "@small-tech/auto-encrypt": "^3.0.1",
     "@small-tech/auto-encrypt-localhost": "^7.0.5",
     "fs-extra": "^9.0.1"
   },
