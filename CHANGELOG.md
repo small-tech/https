@@ -18,6 +18,8 @@ Cross platform once again.
 
     This fixes a regression introduced on Windows in the 3.x branch due to the way in which `__dirname` was being defined.
 
+  - Reduce package size (unpacked) from 51.2KB to 18.3KB by linking to AGPL license body instead of including the entire text of it.
+
 ## [3.0.1] - 2021-03-17
 
 ### Fixed
