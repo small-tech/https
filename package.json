@@ -35,7 +35,9 @@
     "test": "npm run unlockSudo && QUIET=true esm-tape-runner 'test/**/*.js' | tap-monkey",
     "coverage": "npm run unlockSudo && QUIET=true c8 esm-tape-runner 'test/**/*.js' | tap-monkey",
     "test-debug": "npm run unlockSudo && esm-tape-runner 'test/**/*.js' | tap-monkey",
-    "coverage-debug": "npm run unlockSudo && c8 esm-tape-runner 'test/**/*.js' | tap-monkey"
+    "coverage-debug": "npm run unlockSudo && c8 esm-tape-runner 'test/**/*.js' | tap-monkey",
+    "test-on-windows": "node test/index.js",
+    "coverage-on-windows": "c8 node test/index.js"
   },
   "author": {
     "name": "Aral Balkan",
