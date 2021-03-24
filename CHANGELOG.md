@@ -4,17 +4,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.3] - 2021-03-24
+
+A hybrid approach to local certificates.
+
+### Changed
+
+Upgrade Auto Encrypt Localhost to version 7.0.7.
+
+This vresion implements a hybrid approach to mkcert installation and certificate authority and certificate creation that combines the best parts of the methods used in 6.x and 7.x.
+
+Specifically:
+
+  - __mkcert is now installed at post-install__ (which removes the requirement for the graphical sudo prompt, which was using pkexec, which behaves differently to sudo and was creating the certificate material files with the wrong permissions on Linux).
+
+  - __root certificate authority and TLS certificates are created as necessary at runtime__ (while this requires the person to enter their sudo password, the prompt is shown in the command-line as expected unlike [the npm bug that was causing the prompt to be hidden when run in a lifecycle script](https://github.com/npm/cli/issues/2887)).
+
+
 ## [3.0.2] - 2021-03-23
 
 Cross platform once again.
 
 ### Changed
 
-  - Update Auto Encrypt Localhost to version 7.0.5.
+  - Upgrade Auto Encrypt Localhost to version 7.0.5.
 
     This fixes installation on macOS (which was failing because of differences in how the graphical sudo prompt affects file permissions between Linux and macOS) and re-implements Windows support (tested/supported only on Windows 10, under Windows Terminal, with PowerShell).
 
-  - Update Auto Encrypt to version 3.0.1.
+  - Upgrade Auto Encrypt to version 3.0.1.
 
     This fixes a regression introduced on Windows in the 3.x branch due to the way in which `__dirname` was being defined.
 

@@ -1,6 +1,6 @@
 {
   "name": "@small-tech/https",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.",
   "main": "index.js",
   "files": [
