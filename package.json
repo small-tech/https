@@ -30,11 +30,12 @@
     "url": "https://github.com/small-tech/https.git"
   },
   "scripts": {
+    "unlockSudo": "sudo echo 'Got sudo permissions.\n'",
     "example": "node example/",
-    "test": "QUIET=true esm-tape-runner 'test/**/*.js' | tap-monkey",
-    "coverage": "QUIET=true c8 esm-tape-runner 'test/**/*.js' | tap-monkey",
-    "test-debug": "esm-tape-runner 'test/**/*.js' | tap-monkey",
-    "coverage-debug": "c8 esm-tape-runner 'test/**/*.js' | tap-monkey"
+    "test": "npm run unlockSudo && QUIET=true esm-tape-runner 'test/**/*.js' | tap-monkey",
+    "coverage": "npm run unlockSudo && QUIET=true c8 esm-tape-runner 'test/**/*.js' | tap-monkey",
+    "test-debug": "npm run unlockSudo && esm-tape-runner 'test/**/*.js' | tap-monkey",
+    "coverage-debug": "npm run unlockSudo && c8 esm-tape-runner 'test/**/*.js' | tap-monkey"
   },
   "author": {
     "name": "Aral Balkan",
@@ -44,7 +45,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@small-tech/auto-encrypt": "^3.0.1",
-    "@small-tech/auto-encrypt-localhost": "^7.0.5",
+    "@small-tech/auto-encrypt-localhost": "^7.0.7",
     "fs-extra": "^9.0.1"
   },
   "devDependencies": {
