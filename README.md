@@ -4,8 +4,8 @@ A drop-in standard Node.js HTTPS module replacement with both automatic developm
 
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
-  - Automatically-provisioned TLS certificates at localhost with no browser warnings.
-  - Automatically-provisioned TLS certificates at hostname via Let’s Encrypt.
+  - Automatically-provisioned TLS certificates at localhost with no browser warnings via [mkcert](https://github.com/FiloSottile/mkcert).
+  - Automatically-provisioned TLS certificates at hostname via [Let’s Encrypt](https://letsencrypt.org/).
   - Automatic HTTP to HTTPS forwarding at hostname.
 
 That’s it.
@@ -30,7 +30,7 @@ If you’re evaluating this for a “startup” or an enterprise, let us save yo
 
 Tested and supported on:
 
-  - Linux (tested with elementary OS Hera)
+  - Linux (tested with elementary OS 5.x/Hera)
   - macOS (tested on Big Sur)
   - Windows 10 (tested in Windows Terminal with PowerShell)
 
@@ -42,11 +42,7 @@ Tested and supported on:
 npm i @small-tech/https
 ```
 
-Note that during installation, this module’s Auto Encrypt Localhost dependency will create your local certificate authority and install it in the system root store and generate locally-trusted certificates. These actions require elevated privileges (`sudo`). Since [npm does not handle sudo prompts correctly in lifecycle scripts](https://github.com/npm/cli/issues/2887), you will see a graphical sudo prompt pop up to ask you for your adminstrator password. Once you’ve provided it, installation will proceed as normal.
-
-![Screenshot of graphical sudo prompt “Authentication required: Authentication is needed to run /bin/bash as the super user”](https://small-tech.org/images/graphical-sudo-prompt.png)
-
-On Windows, you will also be prompted separately to allow the installation of the certificates.
+Note that during installation, this module’s Auto Encrypt Localhost dependency will download the correct mkcert binary to your machine.
 
 ## Examples
 
@@ -65,6 +61,8 @@ server.listen(443, () => {
 ```
 
 Hit `https://localhost` and you should see your site with locally-trusted TLS certificates.
+
+@small-tech/https uses mkcert to create a local certificate authority and add it to the various trust stores. It then uses it to create locally-trusted TLS certificates that are automatically used by your server.
 
 ### At hostname with automatically-provisioned Let’s Encrypt certificates.
 
@@ -85,6 +83,8 @@ server.listen(443, () => {
 ```
 
 To provision globally-trusted Let’s Encrypt certificates, we additionally create an `options` object containing the domain(s) we want to support, and pass it as the first argument in the `createServer()` method.
+
+@small-tech/https automatically provisions Let’s Encrypt certificates for you the first time your server is hit (this first load will take longer than future ones). During this initial load, other requests are ignored. This module will also automatically renew your certificates as necessary in plenty of time before they expire.
 
 You can find a version of this example in the `/example` folder. To download and run that version:
 
@@ -149,7 +149,7 @@ A complete [small technology](https://small-tech.org/about/#small-technology) to
 
 ## Copyright
 
-&copy; 2020 [Aral Balkan](https://ar.al), [Small Technology Foundation](https://small-tech.org).
+&copy; 2020-2021 [Aral Balkan](https://ar.al), [Small Technology Foundation](https://small-tech.org).
 
 Let’s Encrypt is a trademark of the Internet Security Research Group (ISRG). All rights reserved. Node.js is a trademark of Joyent, Inc. and is used with its permission. We are not endorsed by or affiliated with Joyent or ISRG.
 
