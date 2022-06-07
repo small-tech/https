@@ -2,6 +2,8 @@
 
 A drop-in standard Node.js HTTPS module replacement with both automatic development-time (localhost) certificates via Auto Encrypt Localhost and automatic production certificates via Auto Encrypt.
 
+__Note:__ This is the CommonJS (CJS) version of the library. For the ECMAScript Modules (ESM) version, please see the main branch.
+
 Simply replace Node’s `https` module with `@small-tech/https` and get:
 
   - Automatically-provisioned TLS certificates at localhost with no browser warnings.
